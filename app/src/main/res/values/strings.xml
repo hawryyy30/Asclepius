@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Asclepius</string>
+    <string name="camera_x">CameraX</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="analyze">Analyze</string>
+    <string name="result">Result</string>
+    <string name="history_icon_title">History</string>
+
+    <string name="heading_1">Detect Now</string>
+    <string name="description_string">Start by picking a picture to be scanned.</string>
+    <string name="change_image">Change Image</string>
+
+    <string name="heading_2">Result</string>
+    <string name="result_description">Detection accuracy is affected by various factors. Visit doctors if you have unusual symptoms.</string>
+    <string name="result_severe">Elevated Risk Level</string>
+    <string name="result_low">Low Risk Level</string>
+    <string name="severe_desc">We regret to inform you that the results of your cancer detection test indicate a likelihood of more than 50% for the presence of cancer. We understand that this news may be distressing, but please know that early detection and treatment can significantly improve outcomes. We\'re here to support you every step of the way and provide guidance on your next steps. Please don\'t hesitate to reach out to your healthcare provider for further evaluation and personalized care.</string>
+    <string name="low_desc">We are pleased to inform you that the results of your cancer detection test indicate a likelihood of less than 50% for the presence of cancer. We understand that this news may be a relief, but please know that regular screenings and healthy lifestyle choices can help reduce your risk of developing cancer. We encourage you to continue to prioritize your health and well-being by maintaining a balanced diet, staying active, and avoiding harmful habits. If you have any concerns or questions, please don\'t hesitate to reach out to your healthcare provider for further guidance.</string>
+    <string name="btn_save">Save my result</string>
+
+    <string name="heading_3">History</string>
+    <string name="history_description">View your past results here.</string>
+    <string name="no_history">No history yet.</string>
+    <string name="recommended_articles">Recommended Articles</string>
+
+    <string name="heading_4">About Us</string>
+    <string name="subheading_4">Get to know us better</string>
+    <string name="about_us">Asclepius is dedicated to providing you with a seamless experience in monitoring your skin health. Our app harnesses advanced technology to offer you a simple yet effective way to stay vigilant against skin cancer. With Asclepius, detecting potential issues early is convenient and accessible.</string>
+    <string name="img_desc">Image of asclepius</string>
+    <string name="btn_string">Understood</string>
+
+
+    <string name="madeby">Made by Harry with ❤ </string>
+
+</resources>

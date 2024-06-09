@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_marginHorizontal="16dp"
+    android:layout_height="match_parent"
+    tools:context=".view.ResultActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorBarLayout"
+            android:layout_width="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appBarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/topAppBar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    app:menu="@menu/top_menu"
+                    app:navigationIcon="@drawable/app_icon"
+                    />
+
+            </com.google.android.material.appbar.AppBarLayout>
+
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+        <TextView
+            android:layout_marginTop="16dp"
+            android:id="@+id/heading_2"
+            android:layout_width="0dp"
+            android:layout_marginHorizontal="12dp"
+            android:layout_height="match_parent"
+            android:text="@string/heading_2"
+            android:textSize="32sp"
+            android:textColor="@color/dark_blue"
+            app:layout_constraintTop_toBottomOf="@id/coordinatorBarLayout"
+            app:layout_constraintStart_toStartOf="@id/coordinatorBarLayout"/>
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/result_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/heading_2"
+            android:text="@string/result_description"
+            app:layout_constraintStart_toStartOf="@id/heading_2"
+            android:textSize="18sp"/>
+
+        <ImageView
+            android:id="@+id/result_image"
+            android:layout_width="0dp"
+            android:layout_height="400dp"
+            android:layout_marginEnd="12dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintStart_toStartOf="@id/heading_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/result_description"
+            app:srcCompat="@drawable/picture_placeholder"
+            />
+
+        <TextView
+            android:id="@+id/result_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/result"
+            android:textSize="32sp"
+            android:textColor="@color/dark_blue"
+            android:textAlignment="center"
+            app:layout_constraintTop_toBottomOf="@id/result_image"/>
+        <TextView
+            android:layout_marginTop="16dp"
+            android:id="@+id/result_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/result_text"
+            android:textSize="18sp"
+            android:lineSpacingExtra="4sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/severe_desc"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/save_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="16dp"
+            android:backgroundTint="@color/light_blue"
+            android:textColor="@color/dark_blue"
+            app:strokeWidth="2dp"
+            app:strokeColor="@color/dark_blue"
+            app:layout_constraintTop_toBottomOf="@id/result_message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/btn_save"/>
+
+
+        <TextView
+            android:id="@+id/recommended_heading"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/recommended_articles"
+            app:layout_constraintTop_toBottomOf="@id/save_btn"
+            android:textColor="@color/dark_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="24sp"/>
+
+        <ScrollView
+            app:layout_constraintTop_toBottomOf="@id/recommended_heading"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
