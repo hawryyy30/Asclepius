@@ -32,5 +32,7 @@
 
 
     <string name="madeby">Made by Harry with ❤ </string>
+    <string name="no_image_hint">No Image Is Selected. Try again</string>
+
 
 </resources>

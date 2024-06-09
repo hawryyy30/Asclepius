@@ -1,15 +1,20 @@
 package com.dicoding.asclepius.view
 
-import android.Manifest
+
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.get
 import com.dicoding.asclepius.R
 import com.dicoding.asclepius.databinding.ActivityMainBinding
+import com.yalantis.ucrop.UCrop
+import java.security.MessageDigest
+import java.util.UUID
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -18,7 +23,12 @@ class MainActivity : AppCompatActivity() {
 
     private val galleryPicker = registerForActivityResult(ActivityResultContracts.PickVisualMedia()){image ->
         if(image != null){
-
+            val imgName = generateHashedFileName()
+            UCrop.of(image,Uri.fromFile(cacheDir.resolve(imgName))).start(this)
+            currentImageUri = image;
+            showImage()
+        } else {
+            showToast(getString(R.string.no_image_hint))
         }
 
     }
@@ -42,19 +52,34 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        binding.galleryButton.setOnClickListener {
+            startGallery()
+        }
+        binding.analyzeButton.setOnClickListener{
+            showToast("Wait")
+        }
+
+        toggleButtonState()
+
+
 
     }
 
     private fun startGallery() {
-
+        galleryPicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
     private fun showImage() {
-        // TODO: Menampilkan gambar sesuai Gallery yang dipilih.
+        currentImageUri?.let {
+            binding.previewImageView.setImageURI(it);
+        }
+        toggleButtonState()
     }
 
     private fun analyzeImage() {
-        // TODO: Menganalisa gambar yang berhasil ditampilkan.
+        val intent = Intent(this, ResultActivity::class.java)
+        intent.putExtra(ResultActivity.EXTRA_IMAGE_URI, currentImageUri.toString())
+        startActivity(intent)
     }
 
     private fun moveToResult() {
@@ -62,7 +87,39 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
+    private fun generateHashedFileName(): String {
+        val uniqueString = UUID.randomUUID().toString() + System.currentTimeMillis()
+        val messageDigest = MessageDigest.getInstance("SHA-256")
+        val hashBytes = messageDigest.digest(uniqueString.toByteArray())
+        val hashString = hashBytes.joinToString(""){
+            "%02x".format(it)
+        }
+        return "croppedImage_$hashString.jpg"
+    }
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun toggleButtonState(){
+        binding.analyzeButton.isEnabled = currentImageUri != null
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d(TAG, "onActivityResult")
+        if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
+            currentImageUri = UCrop.getOutput(data!!)
+            showImage()
+        } else if (resultCode == UCrop.RESULT_ERROR) {
+            val errorMessage = UCrop.getError(data!!)?.message.toString()
+            showToast(errorMessage)
+            Log.e(TAG, errorMessage)
+        }
+    }
+
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 }
