@@ -11,12 +11,12 @@
     <string name="description_string">Start by picking a picture to be scanned.</string>
     <string name="change_image">Change Image</string>
 
-    <string name="heading_2">Result</string>
+    <string name="heading_2">Verdict</string>
     <string name="result_description">Detection accuracy is affected by various factors. Visit doctors if you have unusual symptoms.</string>
     <string name="result_severe">Elevated Risk Level</string>
     <string name="result_low">Low Risk Level</string>
-    <string name="severe_desc">We regret to inform you that the results of your cancer detection test indicate a likelihood of more than 50% for the presence of cancer. We understand that this news may be distressing, but please know that early detection and treatment can significantly improve outcomes. We\'re here to support you every step of the way and provide guidance on your next steps. Please don\'t hesitate to reach out to your healthcare provider for further evaluation and personalized care.</string>
-    <string name="low_desc">We are pleased to inform you that the results of your cancer detection test indicate a likelihood of less than 50% for the presence of cancer. We understand that this news may be a relief, but please know that regular screenings and healthy lifestyle choices can help reduce your risk of developing cancer. We encourage you to continue to prioritize your health and well-being by maintaining a balanced diet, staying active, and avoiding harmful habits. If you have any concerns or questions, please don\'t hesitate to reach out to your healthcare provider for further guidance.</string>
+    <string name="severe_desc">We regret to inform you that the results of your cancer detection test indicate a likelihood of cancer. We understand that this news may be distressing, but please know that early detection and treatment can significantly improve outcomes. We\'re here to support you every step of the way and provide guidance on your next steps. Please don\'t hesitate to reach out to your healthcare provider for further evaluation and personalized care.</string>
+    <string name="low_desc">We are pleased to inform you that the results of your cancer detection test indicate a likelihood of cancer. We understand that this news may be a relief, but please know that regular screenings and healthy lifestyle choices can help reduce your risk of developing cancer. We encourage you to continue to prioritize your health and well-being by maintaining a balanced diet, staying active, and avoiding harmful habits. If you have any concerns or questions, please don\'t hesitate to reach out to your healthcare provider for further guidance.</string>
     <string name="btn_save">Save my result</string>
 
     <string name="heading_3">History</string>
@@ -33,6 +33,15 @@
 
     <string name="madeby">Made by Harry with ❤ </string>
     <string name="no_image_hint">No Image Is Selected. Try again</string>
+
+    <string name="init_classifier_failed">Failed to start Image Classifier. Try again</string>
+    <string name="classify_failed">There is a problem when classifying the image</string>
+    <string name="view_model_invalid">Invalid view model class</string>
+    <string name="confidence_score">50% Cancer</string>
+    <string name="confidence_score_decorator">Confidence score:</string>
+    <string name="tv_verdictLabel_placeholder">Cancerous</string>
+    <string name="tv_confidenceScore_placeholder">70%</string>
+    <string name="tv_time_placeholder">17 May 2021, 10:00 AM</string>
 
 
 </resources>

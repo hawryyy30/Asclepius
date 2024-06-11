@@ -12,6 +12,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.get
 import com.dicoding.asclepius.R
 import com.dicoding.asclepius.databinding.ActivityMainBinding
+import com.dicoding.asclepius.view.history.HistoryActivity
+import com.dicoding.asclepius.view.result.ResultActivity
 import com.yalantis.ucrop.UCrop
 import java.security.MessageDigest
 import java.util.UUID
@@ -56,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             startGallery()
         }
         binding.analyzeButton.setOnClickListener{
-            showToast("Wait")
+            analyzeImage()
         }
 
         toggleButtonState()
@@ -82,10 +84,6 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun moveToResult() {
-        val intent = Intent(this, ResultActivity::class.java)
-        startActivity(intent)
-    }
 
     private fun generateHashedFileName(): String {
         val uniqueString = UUID.randomUUID().toString() + System.currentTimeMillis()

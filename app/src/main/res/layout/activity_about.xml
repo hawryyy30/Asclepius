@@ -4,83 +4,86 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.AboutActivity"
-    android:padding="16dp">
-
+    android:padding="16dp"
+    tools:context=".view.AboutActivity">
 
     <TextView
         android:id="@+id/heading_4"
-        android:layout_marginTop="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="32sp"
-        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="0dp"
-        android:textColor="@color/dark_blue"
-
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/heading_4"
-        />
+        android:textColor="@color/dark_blue"
+        android:textSize="32sp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <TextView
         android:id="@+id/subheading_4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/heading_4"
-        app:layout_constraintEnd_toEndOf="@id/heading_4"
+        android:layout_marginTop="8dp"
         android:text="@string/subheading_4"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/heading_4"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/heading_4" />
 
     <ImageView
         android:id="@+id/imageAbout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
-    app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/heading_4"
-        app:layout_constraintTop_toBottomOf="@id/subheading_4"
-        android:src="@drawable/asclepius_about"
-        android:contentDescription="@string/img_desc" />
+        android:layout_marginBottom="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="24dp"
+        android:contentDescription="@string/img_desc"
+        android:src="@drawable/app_icon"
+        app:layout_constraintBottom_toTopOf="@id/aboutUs"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subheading_4" />
 
     <TextView
         android:id="@+id/aboutUs"
         android:layout_width="0dp"
-        android:layout_marginTop="18dp"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/heading_4"
-        app:layout_constraintTop_toBottomOf="@id/imageAbout"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp"
         android:text="@string/about_us"
-        />
+        android:lineHeight="24dp"
+        android:textSize="20sp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/btn_back"
+        app:layout_constraintTop_toBottomOf="@id/imageAbout" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_back"
-        app:strokeColor="@color/dark_blue"
-        app:strokeWidth="2dp"
         android:layout_width="0dp"
-        android:paddingVertical="15dp"
         android:layout_height="wrap_content"
-        android:text="@string/btn_string"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/aboutUs"
         android:layout_marginTop="32dp"
-        android:textColor="@color/dark_blue"
-        android:backgroundTint="@color/light_blue"
-        />
-
+        android:backgroundTint="@color/btn_bg"
+        android:paddingVertical="15dp"
+        android:text="@string/btn_string"
+        android:textColor="@color/btn_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutUs"
+        app:strokeColor="@color/btn_stroke"
+        app:strokeWidth="2dp" />
 
     <TextView
-
+        android:id="@+id/footerText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/madeby"
+        android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textAlignment="center"/>
-
-
+        app:layout_constraintStart_toStartOf="parent"
+         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

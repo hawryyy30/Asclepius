@@ -16,10 +16,10 @@
             android:name=".view.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".view.HistoryActivity"
+            android:name=".view.history.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ResultActivity"
+            android:name=".view.result.ResultActivity"
             android:exported="false" />
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
