@@ -6,7 +6,6 @@ import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import android.util.Log
 import com.dicoding.asclepius.R
 import org.tensorflow.lite.DataType
 import org.tensorflow.lite.support.common.ops.CastOp
@@ -40,7 +39,6 @@ class ImageClassifierHelper(
             imageClassifier = ImageClassifier.createFromFileAndOptions(context, modelName,optionsBuilder.build() )
         } catch(e: IllegalStateException){
             classifierListener?.onError(context.getString(R.string.init_classifier_failed))
-            Log.e(TAG,e.message.toString() )
         }
 
     }
@@ -69,9 +67,5 @@ class ImageClassifierHelper(
     interface ClassifierListener{
         fun onError(error: String)
         fun onResults(results: List<Classifications>?)
-    }
-
-    companion object {
-        private const val TAG ="ImageClassifierHelper"
     }
 }

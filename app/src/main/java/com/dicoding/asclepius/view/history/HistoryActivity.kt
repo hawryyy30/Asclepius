@@ -2,13 +2,9 @@ package com.dicoding.asclepius.view.history
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.asclepius.R
-import com.dicoding.asclepius.data.local.ClassificationVerdict
 import com.dicoding.asclepius.databinding.ActivityHistoryBinding
 import com.dicoding.asclepius.util.ViewModelFactory
 

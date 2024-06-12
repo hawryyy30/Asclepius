@@ -5,7 +5,6 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -105,19 +104,15 @@ class MainActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.d(TAG, "onActivityResult")
+
         if (resultCode == RESULT_OK && requestCode == UCrop.REQUEST_CROP) {
             currentImageUri = UCrop.getOutput(data!!)
             showImage()
         } else if (resultCode == UCrop.RESULT_ERROR) {
             val errorMessage = UCrop.getError(data!!)?.message.toString()
             showToast(errorMessage)
-            Log.e(TAG, errorMessage)
+
         }
     }
 
-
-    companion object {
-        private const val TAG = "MainActivity"
-    }
 }

@@ -9,10 +9,6 @@ class ResultRepository(private val dao: DAO) {
         return dao.fetchAll()
     }
 
-    fun fetchById(id: Int): LiveData<ClassificationVerdict> {
-        return dao.fetchClassificationVerdictById(id)
-    }
-
     suspend fun insertVerdict(classificationVerdict: ClassificationVerdict) {
         dao.insertVerdict(classificationVerdict)
     }
