@@ -8,4 +8,5 @@
     <color name="btn_bg">@color/light_blue</color>
     <color name="btn_stroke">@color/dark_blue</color>
     <color name="btn_text">@color/dark_blue</color>
+    <color name="article_text">@color/dark_blue</color>
 </resources>

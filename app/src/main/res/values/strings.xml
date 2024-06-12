@@ -42,6 +42,9 @@
     <string name="tv_verdictLabel_placeholder">Cancerous</string>
     <string name="tv_confidenceScore_placeholder">70%</string>
     <string name="tv_time_placeholder">17 May 2021, 10:00 AM</string>
+    <string name="btn_readMore">Read more</string>
+    <string name="tv_loadingMsg">Crunching news just for you…</string>
+    <string name="empty_state">empty state</string>
 
 
 </resources>

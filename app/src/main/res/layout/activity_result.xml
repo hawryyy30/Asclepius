@@ -11,8 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorBarLayout"
@@ -45,7 +45,7 @@
             android:id="@+id/heading_2"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginHorizontal="12dp"
+
             android:layout_marginTop="16dp"
             android:text="@string/heading_2"
 
@@ -67,8 +67,8 @@
         <ImageView
             android:id="@+id/result_image"
             android:layout_width="0dp"
-            android:layout_marginTop="16dp"
             android:layout_height="325dp"
+            android:layout_marginTop="16dp"
             android:scaleType="fitCenter"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +104,6 @@
             app:layout_constraintStart_toEndOf="@id/circular_progress" />
 
 
-
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -112,10 +111,10 @@
             android:text="@string/confidence_score_decorator"
             android:textColor="@color/dark_blue"
             android:textSize="16sp"
-            app:layout_constraintTop_toTopOf="@id/circular_progress"
             app:layout_constraintBottom_toTopOf="@+id/confidence_score"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/circular_progress" />
+            app:layout_constraintStart_toEndOf="@id/circular_progress"
+            app:layout_constraintTop_toTopOf="@id/circular_progress" />
 
 
         <TextView
@@ -126,8 +125,8 @@
             android:lineSpacingExtra="4sp"
             android:text="@string/severe_desc"
             android:textSize="18sp"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/circular_progress" />
 
         <com.google.android.material.button.MaterialButton
@@ -136,10 +135,10 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="32dp"
             android:backgroundTint="@color/btn_bg"
-            android:textColor="@color/btn_text"
-            android:text="@string/btn_save"
-            android:textSize="16sp"
             android:paddingVertical="16dp"
+            android:text="@string/btn_save"
+            android:textColor="@color/btn_text"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/result_message"
@@ -150,8 +149,8 @@
         <TextView
             android:id="@+id/recommended_heading"
             android:layout_width="0dp"
-            android:layout_marginTop="32dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:text="@string/recommended_articles"
             android:textColor="@color/dark_blue"
             android:textSize="24sp"
@@ -159,14 +158,58 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/save_btn" />
 
-        <ScrollView
-            android:layout_width="match_parent"
+        <ProgressBar
+            android:id="@+id/loading_bar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recommended_heading">
+            app:layout_constraintTop_toBottomOf="@id/recommended_heading" />
 
-        </ScrollView>
+        <TextView
+            android:id="@+id/loading_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/tv_loadingMsg"
+            android:textAlignment="center"
+            android:textColor="@color/btn_text"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loading_bar" />
+
+        <ImageView
+            android:id="@+id/empty_state"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="32dp"
+            android:contentDescription="@string/empty_state"
+            android:src="@drawable/emptystate"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recommended_heading" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_articles"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recommended_heading"
+            tools:listitem="@layout/article_card" />
+
+        <nl.dionsegijn.konfetti.xml.KonfettiView
+            android:id="@+id/konfettiView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

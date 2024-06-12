@@ -1,18 +1,25 @@
 package com.dicoding.asclepius.view.result
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.net.Uri
 import android.os.Build
-import android.util.Log
+import android.view.View
+
 import android.widget.Toast
 import com.dicoding.asclepius.databinding.ActivityResultBinding
 import com.dicoding.asclepius.helper.ImageClassifierHelper
 import com.dicoding.asclepius.util.ViewModelFactory
 import androidx.activity.viewModels
+import androidx.core.view.get
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dicoding.asclepius.Konfetti.Presets
 import com.dicoding.asclepius.R
 import com.dicoding.asclepius.data.local.ClassificationVerdict
+import com.dicoding.asclepius.view.AboutActivity
+import com.dicoding.asclepius.view.history.HistoryActivity
 import org.tensorflow.lite.task.vision.classifier.Classifications
 import java.text.NumberFormat
 
@@ -22,13 +29,41 @@ class ResultActivity : AppCompatActivity() {
     private val viewModel: ResultViewModel by viewModels<ResultViewModel> {
         ViewModelFactory.fetchInstance(this)
     }
+    private val articleViewModel: ArticlesViewModel by viewModels<ArticlesViewModel> {
+        ViewModelFactory.fetchInstance(this)
+    }
 
     private var verdict: ClassificationVerdict? = null
+
+    private val articleAdapter = ArticlesAdapter().apply {
+        setHasStableIds(true)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        binding.appBarLayout[0].setOnClickListener{
+            showToast(getString(R.string.madeby))
+        }
+        binding.topAppBar.menu.findItem(R.id.btn_history).setOnMenuItemClickListener {
+            val intent = Intent(this, HistoryActivity::class.java)
+            startActivity(intent)
+            true
+        }
+        binding.topAppBar.menu.findItem(R.id.btn_about).setOnMenuItemClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+            true
+        }
+
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvArticles.layoutManager = layoutManager
+        binding.rvArticles.adapter = articleAdapter
+        observeArticles()
 
         intent.getStringExtra(EXTRA_IMAGE_URI)?.let { imageUriString ->
             val imageUri = Uri.parse(imageUriString)
@@ -36,6 +71,7 @@ class ResultActivity : AppCompatActivity() {
             initializeImageClassifier(imageUri)
             imageClassifierHelper.classifyStaticImage(imageUri)
             binding.saveBtn.setOnClickListener {
+                showToast("Your result is saved ")
                 verdict?.let { viewModel.insert(it) }
                 finish()
             }
@@ -57,8 +93,7 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun initializeImageClassifier(imageUri: Uri) {
-        imageClassifierHelper = ImageClassifierHelper(
-            context = this,
+        imageClassifierHelper = ImageClassifierHelper(context = this,
             classifierListener = object : ImageClassifierHelper.ClassifierListener {
                 override fun onError(error: String) {
                     showToast(error)
@@ -82,8 +117,7 @@ class ResultActivity : AppCompatActivity() {
                         binding.confidenceScore.text = "-"
                     }
                 }
-            }
-        )
+            })
     }
 
     @SuppressLint("SetTextI18n")
@@ -91,21 +125,52 @@ class ResultActivity : AppCompatActivity() {
         binding.resultImage.setImageURI(imageUri)
         binding.confidenceScore.text =
             "${NumberFormat.getPercentInstance().format(confidenceScore)} $label"
-        val progress = (confidenceScore * 100).toInt()
+        binding.circularProgress.progress = (confidenceScore * 100).toInt().let { progress ->
 
-        Log.d("ResultActivity", "Label: $label, Progress: $progress")
-
-        if (label.contains("cancer", ignoreCase = true)) {
-            binding.resultMessage.text = getString(R.string.severe_desc)
-        } else {
-            binding.resultMessage.text = getString(R.string.low_desc)
+            if (label == "Cancer") {
+                binding.resultMessage.text = getString(R.string.severe_desc)
+                progress
+            } else {
+                toggleKonfetti()
+                binding.resultMessage.text = getString(R.string.low_desc)
+                100 - progress
+            }
         }
-        binding.circularProgress.progress = progress
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this@ResultActivity, message, Toast.LENGTH_SHORT).show()
     }
+
+
+    private fun observeArticles() {
+        articleViewModel.articlesLiveData.observe(this) {
+            articleAdapter.submitList(it)
+            updateEmptyStateVisibility(it.isEmpty())
+        }
+        articleViewModel.isLoadingLiveData.observe(this) {
+
+            binding.loadingBar.visibility = if (it) View.VISIBLE else View.GONE
+            binding.loadingMessage.visibility = if (it) View.VISIBLE else View.GONE
+        }
+        articleViewModel.errorMsgLiveData.observe(this) {
+            if (it.isNotEmpty()) {
+                binding.emptyState.visibility = if (it.isNotEmpty()) View.GONE else View.VISIBLE
+                showToast(it)
+                updateEmptyStateVisibility(true)
+            }
+        }
+    }
+
+    fun toggleKonfetti() {
+        binding.konfettiView.start(Presets.rain())
+    }
+
+    private fun updateEmptyStateVisibility(isEmpty: Boolean) {
+        val isEmptyStateVisible = isEmpty || articleAdapter.itemCount == 0
+        binding.emptyState.visibility = if (isEmptyStateVisible) View.VISIBLE else View.GONE
+    }
+
 
     companion object {
         const val EXTRA_IMAGE_URI = "extra_image_uri"
